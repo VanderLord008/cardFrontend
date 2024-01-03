@@ -8,7 +8,7 @@ import {
   updateGame,
 } from "../store/userSlice";
 import store from "../store";
-const socket = io.connect("http://localhost:9000/");
+const socket = io.connect("https://cardbackend.onrender.com");
 //const dispatch = useDispatch();
 
 socket.on("welcome", (data) => {
