@@ -1,0 +1,19 @@
+.cardContainer {
+  width: calc(100vw / 13);
+  height: 200px;
+  background-color: aquamarine;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  outline: 1px solid black;
+}
+.cardContainer p {
+  position: relative;
+  left: 0px;
+  top: 0;
+  text-align: left;
+}
+.cardType {
+  height: calc(100%-50px);
+}

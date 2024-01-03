@@ -1,0 +1,10 @@
+.cardRack {
+  width: 100vw;
+  display: flex;
+  position: absolute;
+  bottom: 0px;
+}
+.currentHand {
+  width: 100vw;
+  display: flex;
+}
