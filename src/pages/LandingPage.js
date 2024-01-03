@@ -111,7 +111,7 @@ const LandingPage = () => {
       if (currentHand.length > 0) {
         const firstCard = currentHand[0].card;
         console.log("firsthand");
-        console.log(firsthand);
+        console.log(firstCard);
         if (playerTurn === userSocketId && turup.length > 0) {
           //check if user has cardtype that is same as the first card of this hand
           console.log("i ran");
