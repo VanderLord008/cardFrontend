@@ -8,7 +8,7 @@ import {
   updateGame,
 } from "../store/userSlice";
 import store from "../store";
-const socket = io.connect("https://cardbackend.onrender.com");
+const socket = io.connect("http://localhost:9000/");
 //const dispatch = useDispatch();
 
 socket.on("welcome", (data) => {
@@ -23,6 +23,7 @@ export const createGame = (data) => {
 socket.on("createGameResponse", (data) => {
   console.log(data);
   console.log("your game id is - " + data.payload.game.id);
+  store.dispatch(setGameId(data.payload.game.id));
 });
 export const joinGame = (data) => {
   //console.log(data);
@@ -32,7 +33,6 @@ socket.on("joinGameResponse", (data) => {
   console.log(data);
   //console.log("your game id is - " + data.payload.game.id);
   //console.log("it worked");
-  store.dispatch(setGameId(data.payload.game.id));
   // store.dispatch(setPlayers(data.payload.game.clients));
   store.dispatch(
     updateGame({
@@ -40,6 +40,7 @@ socket.on("joinGameResponse", (data) => {
       value: data.payload.game.clients,
     })
   );
+  store.dispatch(setGameId(data.payload.game.id));
 });
 export const firstShuffle = (data) => {
   console.log(data);
