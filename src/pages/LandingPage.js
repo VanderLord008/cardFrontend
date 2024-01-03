@@ -242,14 +242,18 @@ const LandingPage = () => {
   const [inputText, setInputText] = useState("");
   return (
     <>
-      <div>
-        <button onClick={gameCreationHandler}>create game</button>
-        <input
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-        />
-        <button onClick={gameJoinHandler}>join game</button>
-      </div>
+      {gameId.length === 0 ? (
+        <div>
+          <button onClick={gameCreationHandler}>create game</button>
+          <input
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+          />
+          <button onClick={gameJoinHandler}>join game</button>
+        </div>
+      ) : (
+        <div>here is your game link to share with your friends {gameId}</div>
+      )}
       <div>
         {currentPlayers.length > 0 &&
           currentPlayers.map((cp) => (
