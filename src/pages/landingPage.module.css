@@ -1,10 +1,133 @@
+
+.currentHand {
+  width: 100vw;
+  display: flex;
+}
+.mainscreen{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 100%;
+}
+.mainscreen_Heading{
+font-size: 2.5rem;
+font-weight: 700;
+margin-top: 1rem;
+}
+.mainscreen_Image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mainscreen_Image img{
+width: 50%;
+border-radius: 50%;
+margin-top: 7rem;
+
+}
+.mainscreen_Buttons{
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  position: absolute;
+  bottom: 10px;
+}
+.mainscreen_Buttons button{
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #740eef;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.mainscreen_Buttons input{
+  padding: 5px;
+  border-radius: 15px;
+  margin: 5px;
+}
+
+.gameLinkInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.playersRoster{
+  display: flex;
+  max-height: 100px;
+  flex-direction: row;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.shuffleInfo{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.shuffleInfo button{
+  width: 75%;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #740eef;
+  margin: 5px;
+  cursor: pointer;
+  
+  
+}
+
+.biddingContainer{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+.biddingContainer .biddingButtons button{
+   padding: 10px;
+  border-radius: 15px;
+  background-color: #740eef;
+  margin: 5px;
+  cursor: pointer;
+  width: 60px;
+}
+
+.biddingContainer .biddingTypes {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.biddingContainer .biddingTypes button{
+   padding: 10px;
+  border-radius: 15px;
+  background-color: #9663d4;
+  margin: 5px;
+  cursor: pointer;
+  width: 20%;
+}
+
+.biddingContainer button
+{
+     padding: 10px;
+  border-radius: 15px;
+  background-color: #740eef;
+  margin: 5px;
+  cursor: pointer;
+  width: 50%;
+}
 .cardRack {
   width: 100vw;
   display: flex;
   position: absolute;
   bottom: 0px;
-}
-.currentHand {
-  width: 100vw;
-  display: flex;
+  overflow-x: scroll;
+  
+  height: max(35%,100px);
 }

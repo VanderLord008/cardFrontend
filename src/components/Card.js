@@ -40,19 +40,24 @@ const Card = (props) => {
   }
   return (
     <div
-      className={classes.cardContainer}
+      className={classes.card}
       onClick={() => props.cardPlayer(props.value)}
+
+
+
     >
-      <p>
-        {props.value >= 1100
-          ? `${cardRack[(props.value - 1100) % 13]} tu  ch`
-          : props.value >= 1000
-          ? `${cardRack[(props.value - 1000) % 13]} tu`
-          : props.value >= 100
-          ? `${cardRack[(props.value - 100) % 13]} ch`
-          : cardRack[props.value % 13]}
-      </p>
-      <div className={classes.cardType}>{cardType}</div>
+      <div className={classes.cardInfo}>
+        <p>
+          {props.value >= 1100
+            ? `${cardRack[(props.value - 1100) % 13]} tu  ch`
+            : props.value >= 1000
+              ? `${cardRack[(props.value - 1000) % 13]} tu`
+              : props.value >= 100
+                ? `${cardRack[(props.value - 100) % 13]} ch`
+                : cardRack[props.value % 13]}
+        </p>
+        <div className={classes.cardType}>{cardType}</div>
+      </div>
     </div>
   );
 };

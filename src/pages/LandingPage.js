@@ -12,6 +12,8 @@ import store from "../store";
 import { getPlayers } from "../store/userSlice";
 import Card from "../components/Card";
 import classes from "./landingPage.module.css";
+import PlayerInfoCard from "../components/PlayerInfoCard";
+
 
 const LandingPage = () => {
   const dispatch = useDispatch();
@@ -36,6 +38,7 @@ const LandingPage = () => {
   const [handsToWin, setHandsToWin] = useState(7);
   const [selectedTurup, setSelectedTurup] = useState("");
   const [isTurupSelected, setIsTurupSelected] = useState(false);
+  const [areCardsDistributed, setAreCardsDistributed] = useState(false);
 
   useEffect(() => {
     const newItems = pls;
@@ -95,6 +98,7 @@ const LandingPage = () => {
       playerId: userSocketId,
     };
     startGame(payload);
+    setAreCardsDistributed(true)
   };
   const firstShuffleHandler = () => {
     const payload = {
@@ -240,89 +244,143 @@ const LandingPage = () => {
     }
   };
   const [inputText, setInputText] = useState("");
+  const mainImageURL = "https://static.vecteezy.com/system/resources/thumbnails/004/511/281/small_2x/default-avatar-photo-placeholder-profile-picture-vector.jpg";
   return (
     <>
       {gameId.length === 0 ? (
-        <div>
-          <button onClick={gameCreationHandler}>create game</button>
-          <input
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-          />
-          <button onClick={gameJoinHandler}>join game</button>
-        </div>
-      ) : (
-        <div>here is your game link to share with your friends {gameId}</div>
-      )}
-      <div>
-        {currentPlayers.length > 0 &&
-          currentPlayers.map((cp) => (
-            <div key={cp.clientId} style={{ color: cp.color }}>
-              {cp.clientId} fdgsdfg
-            </div>
-          ))}
-      </div>
-      <div>
-        {currentPlayers.length === 4 &&
-          firstShuffleState &&
-          turup.length > 0 && <p>you can start playing now</p>}
-        {!firstShuffleState && (
-          <button onClick={firstShuffleHandler}>First Shuffle</button>
-        )}
-        {isTurupSelected && firstShuffleState && turup.length === 0 && (
-          <p>please wait while others also make their bids</p>
-        )}
-        {firstShuffleState && turup.length > 0 && (
-          <button onClick={gameStartHandler}>Shuffle the rest</button>
-        )}
-      </div>
+        <div className={classes.mainscreen}>
+          <div className={classes.mainscreen_Heading}>
+            GameStart
+          </div>
+          <div className={classes.mainscreen_Image}>
+            <img src={mainImageURL} />
+          </div>
+          <div className={classes.mainscreen_Buttons}>
 
-      <div>your team's score - {playerTeamScore}</div>
-      <div>opponent team's score - {opponentTeamScore}</div>
-      {/* this for selecting the turup */}
-      {!isTurupSelected && firstShuffleState ? (
-        <div>
-          <p>{handsToWin}</p>
-          <span onClick={handsIncrementHandler}>+</span>
-          <span onClick={handsDecrementHandler}>-</span>
-          <p>
-            <span onClick={() => setSelectedTurup("chidi")}>chidi </span>
-            <span onClick={() => setSelectedTurup("hukum")}>hukum </span>
-            <span onClick={() => setSelectedTurup("eent")}>eent </span>
-            <span onClick={() => setSelectedTurup("paan")}>paan</span>
-          </p>
-          <button onClick={turupBidHandler}>make the bid</button>
+            <button onClick={gameCreationHandler}>create game</button>
+            <input
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+            />
+            <button onClick={gameJoinHandler}>join game</button>
+          </div>
         </div>
       ) : (
-        ""
+        <div>
+          {currentPlayers.length < 4 && (
+            <>
+              <div className={classes.gameLinkInfo}>
+                here is your game link to share with your friends and wait for them to join
+                <div className={classes.gameLink}>
+                  {gameId}
+                </div>
+              </div>
+
+            </>
+          )
+          }
+          <div >
+            {currentPlayers.length > 0 && (
+              <div className={classes.playersRoster}>
+                {currentPlayers.map((cp) => (
+
+                  <PlayerInfoCard key={cp.clientId} name={cp.clientId}
+                    color={playerTurn === cp.clientId ? "#523f69" : "brown"}
+                  />
+
+                ))}
+              </div>
+            )
+            }
+          </div>
+          <div>
+            {currentPlayers.length === 4 &&
+              firstShuffleState &&
+              turup.length > 0 && <p>you can start playing now </p>}
+            {currentPlayers.length === 4 && !firstShuffleState && (
+              <div className={classes.shuffleInfo}>
+                <p>start the game by shuffling once</p>
+                <button onClick={firstShuffleHandler}>First Shuffle</button>
+              </div>
+            )}
+            {isTurupSelected && firstShuffleState && turup.length === 0 && (
+              <p>please wait while others also make their bids</p>
+            )}
+            {firstShuffleState && turup.length > 0 && !areCardsDistributed && (
+              <button onClick={gameStartHandler}>Shuffle the rest</button>
+            )}
+          </div>
+
+
+          {/* this for selecting the turup */}
+          {!isTurupSelected && firstShuffleState ? (
+
+            <div className={classes.biddingContainer}>
+              <p>your current bid {handsToWin}</p>
+              <div className={classes.biddingButtons}>
+                <button onClick={handsIncrementHandler}>+</button>
+                <button onClick={handsDecrementHandler}>-</button>
+              </div>
+              <div className={classes.biddingTypes}>
+                <button style={{
+
+                  color: selectedTurup === "chidi" ? 'white' : 'black',
+                  backgroundColor: selectedTurup === "chidi" ? '#523f69' : '#9663d4'
+                }} onClick={() => {
+                  setSelectedTurup("chidi")
+
+                }}>chidi </button>
+                <button style={{
+
+                  color: selectedTurup === "hukum" ? 'white' : 'black',
+                  backgroundColor: selectedTurup === "hukum" ? '#523f69' : '#9663d4'
+                }} onClick={() => setSelectedTurup("hukum")}>hukum </button>
+                <button style={{
+
+                  color: selectedTurup === "eent" ? 'white' : 'black',
+                  backgroundColor: selectedTurup === "eent" ? '#523f69' : '#9663d4'
+                }} onClick={() => setSelectedTurup("eent")}>eent </button>
+                <button style={{
+
+                  color: selectedTurup === "paan" ? 'white' : 'black',
+                  backgroundColor: selectedTurup === "paan" ? '#523f69' : '#9663d4'
+                }} onClick={() => setSelectedTurup("paan")}>paan</button>
+              </div>
+              <button onClick={turupBidHandler}>make the bid</button>
+            </div>
+          ) : (
+            ""
+          )}
+
+          <div className={classes.currentHand}>
+            {currentHand.map(
+              (c) =>
+                currentHand.length > 0 && (
+                  <Card
+                    key={c.card}
+                    cardPlayer={() => cardClickHandler(c)}
+                    value={c.card}
+                  />
+                )
+            )}
+          </div>
+          {playerTurn === userSocketId && <p>its your turn</p>}
+          <div className={classes.cardRack}>
+            {currentCards.length > 0 && [].concat(currentCards).sort((a, b) => a > b ? 1 : -1).map(
+              (cp) =>
+                cp >= 0 && (
+                  <Card
+                    key={cp}
+                    cardPlayer={() => cardClickHandler(cp)}
+                    value={cp}
+                  />
+                )
+            )}
+          </div>
+        </div>
       )}
-      <div className={classes.currentHand}>
-        {currentHand.map(
-          (c) =>
-            currentHand.length > 0 && (
-              <Card
-                key={c.card}
-                cardPlayer={() => cardClickHandler(c)}
-                value={c.card}
-              />
-            )
-        )}
-      </div>
-      {playerTurn === userSocketId && <p>its your turn</p>}
-      <div className={classes.cardRack}>
-        {currentCards.map(
-          (cp) =>
-            cp >= 0 && (
-              <Card
-                key={cp}
-                cardPlayer={() => cardClickHandler(cp)}
-                value={cp}
-              />
-            )
-        )}
-      </div>
+
     </>
   );
-};
-
+}
 export default LandingPage;

@@ -1,19 +1,59 @@
-.cardContainer {
-  width: calc(100vw / 13);
-  height: 200px;
-  background-color: aquamarine;
+ .cardContainer {
+  min-width: 100px;
+  min-height: 130px;
+  background-color: rgb(196, 119, 229);
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
   outline: 1px solid black;
+  height: 100%;
+  width: calc(100vw/13);
 }
-.cardContainer p {
-  position: relative;
-  left: 0px;
-  top: 0;
-  text-align: left;
+
+/*
+.cardContainer .cardInfo {
+  position: absolute;
+ top:-10px;
+  height:20px;
+
+width: 100%;
 }
-.cardType {
-  height: calc(100%-50px);
+
+.cardInfo p{
+  height: 50%;
 }
+
+.cardInfo .cardType{
+  height:50%
+} */
+
+
+.card {
+	
+	 color: #fff;
+	 border-radius: 4px;
+    min-width: 100px;
+  min-height: 130px;
+  background-color: rgb(196, 119, 229);
+  display: flex;
+  flex-direction: column;
+  outline: 1px solid black;
+  height: 100%;
+  width: calc(100vw/13);
+}
+ .card:nth-child(2) {
+  background-color: rgb(196, 119, 229);
+	 margin-left: -20px;
+}
+ .card:nth-child(3) {
+	 box-shadow: 0 5px 16px rgba(0, 0, 0, 0.86);
+	 margin-top: -10px;
+}
+ .card:nth-child(4) {
+	 box-shadow: 0 5px 16px rgba(0, 0, 0, 0.86);
+	 margin-top: -10px;
+}
+ .card:nth-child(5) {
+	 box-shadow: 0 5px 16px rgba(0, 0, 0, 0.86);
+	 margin-top: -10px;
+}
+ 
